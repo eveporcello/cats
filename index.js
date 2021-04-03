@@ -38,6 +38,6 @@ const server = new ApolloServer({
   ])
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🐱 Cat Service running at ${url}`);
+server.listen({ port: PORT }).then(({ port }) => {
+  console.log(`🐱 Cat Service running at ${port}`);
 });
