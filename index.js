@@ -30,7 +30,7 @@ const resolvers = {
   }
 };
 
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4000;
 
 async function startApolloServer() {
   const server = new ApolloServer({
