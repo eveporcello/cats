@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node ."
   },
   "author": "Moon Highway",
   "license": "ISC",
   "dependencies": {
-    "@apollo/federation": "^0.23.0",
-    "apollo-server": "^2.22.2",
-    "graphql": "^15.5.0",
+    "@apollo/server": "^4.10.4",
+    "@apollo/subgraph": "^2.7.4",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "nodemon": "^2.0.7"
   }
 }

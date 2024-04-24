@@ -1,8 +1,9 @@
-const { ApolloServer, gql } = require("apollo-server");
-const {
-  buildFederatedSchema
-} = require("@apollo/federation");
-const cats = require("./cats.json");
+import { ApolloServer } from "@apollo/server";
+import { buildSubgraphSchema } from "@apollo/subgraph";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import gql from "graphql-tag";
+
+import cats from "./cats.json" assert { type: "json" };
 
 const typeDefs = gql`
   type Cat {
@@ -29,17 +30,19 @@ const resolvers = {
   }
 };
 
-const server = new ApolloServer({
-  schema: buildFederatedSchema([
-    {
+const PORT = process.env.PORT || 4001;
+
+async function startApolloServer() {
+  const server = new ApolloServer({
+    schema: buildSubgraphSchema({
       typeDefs,
       resolvers
-    }
-  ])
-});
+    })
+  });
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: PORT }
+  });
+  console.log(`Service running at ${url}`);
+}
 
-const PORT = process.env.PORT || 4000;
-
-server.listen({ port: PORT }).then(({ port }) => {
-  console.log(`🐱 Cat Service running at ${port}`);
-});
+startApolloServer();
